@@ -109,10 +109,10 @@
                     if((el.key == 'ArrowDown' || el.target.id == 'down') && this.dir != 'up'){
                         this.dir = 'down'    
                     }  
-                    if(el.key == 'ArrowLeft' && this.dir != 'right' || el.target.id == 'left'){
+                    if((el.key == 'ArrowLeft' || el.target.id == 'left') && this.dir != 'right'){
                         this.dir = 'left' 
                     }  
-                    if(el.key == 'ArrowRight' && this.dir != 'left' || el.target.id == 'right'){
+                    if((el.key == 'ArrowRight'|| el.target.id == 'right') && this.dir != 'left' ){
                         this.dir = 'right' 
                     }  
                     clearInterval(this.snakeInterval)
