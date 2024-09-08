@@ -103,10 +103,10 @@
 
             Controller(el){
           
-                    if(el.key == 'ArrowUp' && this.dir != 'down' || el.target.id == 'up'){
+                    if((el.key == 'ArrowUp' || el.target.id == 'up') && this.dir != 'down' ){
                         this.dir = 'up'   
                     }        
-                    if(el.key == 'ArrowDown'  && this.dir != 'up' || el.target.id == 'down'){
+                    if((el.key == 'ArrowDown' || el.target.id == 'down') && this.dir != 'up'){
                         this.dir = 'down'    
                     }  
                     if(el.key == 'ArrowLeft' && this.dir != 'right' || el.target.id == 'left'){
