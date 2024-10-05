@@ -67,20 +67,12 @@
         },
         computed:{
                 CalculateRecord(){
-                    
                     if(this.score > this.record){
                         this.record = this.score;
                     }
                     return this.record;
                 },
-                LoopState(){
-                if(!this.loop){
-                    console.log('res')
-                }
-                    else{
-                        console.log('start')
-                    }
-                }
+
             },
         methods:{
             SetStep(){
