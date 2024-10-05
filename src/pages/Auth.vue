@@ -55,7 +55,9 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
+
 const passwordIsValid = helpers.regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/)
+
     export default{
         mixins: ['validationMixin'],
         data(){
@@ -64,15 +66,20 @@ const passwordIsValid = helpers.regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/)
                 mail: '',
                 pass: '',
                 agreement: false,
-                
+                //подстроить под бэкенд
+                isLoading: false,
+                //isAuth поместить потом в стейт менеджер что бы когда пользователь авторизован скрывать меню авторизация/регистрация
+                isAuth: false
             }
         },
         methods: {
-            Auth(){ 
+            async Auth(){ 
                 this.v$.$touch();
                 if(!this.v$.$error && this.v$.$silentErrors){
+                    //заменить потом на адрес с личным кабинетом
                     this.$router.push('/')
                     console.log('isAuth')
+                    // 
                 }
             },
  
@@ -85,6 +92,7 @@ const passwordIsValid = helpers.regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/)
                 else{
                     return false
                 }
+
             }
         },
         validations () {

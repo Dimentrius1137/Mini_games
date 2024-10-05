@@ -6,7 +6,7 @@
             :startingGame="Start">
                 <label for="size">Размер арены: {{ areaSize }}</label>
                 <br>
-                <input type="range" v-model="areaSize" step="2" min="6" max="12">
+                <input type="range" v-model="areaSize" step="2" min="14" max="24">
             </Popup>
         </Transition>
    
@@ -34,9 +34,11 @@
 </template>
 
 <script>
+    let rAF = "";
     import Controls from '@/components/Controls.vue';
-    import InitGame from '@/scripts/snake';
+    import {Init, CreateFood, DrawSnake, SnakeMove, ClearArea, drawScore} from '@/scripts/snake';
     import Popup from '@/components/Popup.vue';
+
     export default{
         components:{
             Popup,
@@ -44,60 +46,81 @@
         },  
         data(){
             return{
-                areaSize: 8,
-                isStart: false,
+                areaSize: 14,
+                score: 0,
                 record: 0,
-                foodInterval: '',
-                snakeInterval: '',
-                newGame: '',
-                dir: '',
+                apples: [],
+                dir: null,
+                spawnFood: null,
+                isStart: false,
                 reset: false,
-                score: 0
+                speed: 0, 
+                maxSpeed: 6,
+                loop: undefined
             }
         },
         created(){
-            window.addEventListener('keyup', this.Controller);
+            window.addEventListener('keyup', this.Controller)
         },
         watch: {
-            score(updatedScore){
-                    return updatedScore;
-                },
+
         },
         computed:{
                 CalculateRecord(){
+                    
                     if(this.score > this.record){
                         this.record = this.score;
                     }
                     return this.record;
+                },
+                LoopState(){
+                if(!this.loop){
+                    console.log('res')
+                }
+                    else{
+                        console.log('start')
+                    }
                 }
             },
         methods:{
             SetStep(){
-                if(window.innerWidth < 450) return 32;
+                if(window.innerWidth < 450) return 16;
 
-                else return 50;
+                else return 32;
+            },
+            gameLoop() {
+                this.loop = window.requestAnimationFrame(this.gameLoop);
+                if (++this.speed < this.maxSpeed) {
+                    return;
+                }
+                this.speed = 0;
+                ClearArea();
+                DrawSnake();
+                this.score = drawScore()
+                SnakeMove(this.dir, this.score)
+                
+             
+
             },
             Start(){
                 this.isStart = !this.isStart;
-                this.apples = [];
-                this.newGame = new InitGame(this.$refs.area, this.areaSize, this.SetStep());
                 if(this.isStart){
-                  
-                    this.newGame.CreateArea();
-                    this.newGame.CreateFood();
-                    this.newGame.InitSnake();
-                    this.interval = setInterval(() => {
-                        this.newGame.CreateFood();
-                }, 3000)
+                Init(this.$refs.area, this.areaSize, this.SetStep(), this.apples);
+                CreateFood();
+                setInterval(() => CreateFood(), 3000);
                 }
+                window.requestAnimationFrame(this.gameLoop)
                 
+               
+
             },
+
             Restart(){
                 this.isStart = !this.isStart;
+                ClearArea();
                 this.score = 0;
-                clearInterval(this.snakeInterval);
-                clearInterval(this.interval)
                 this.reset = false;
+                cancelAnimationFrame(this.loop)
             },
 
 
@@ -115,20 +138,8 @@
                     if((el.key == 'ArrowRight'|| el.target.id == 'right') && this.dir != 'left' ){
                         this.dir = 'right' 
                     }  
-                    clearInterval(this.snakeInterval)
-                    
-                    this.snakeInterval = setInterval(() => {
-                        this.score = this.newGame.count
-                        this.newGame.SnakeMove(this.dir)
-                        this.newGame.InitSnake();
-                        if(this.newGame.ResetGame()){
-                            clearInterval(this.interval)
-                            clearInterval(this.snakeInterval);
-                            this.reset = true;
 
-                        }
-                    }, 150)
-                }
+                },
             },
 
         }
