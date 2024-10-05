@@ -121,6 +121,7 @@
                 this.score = 0;
                 this.reset = false;
                 cancelAnimationFrame(this.loop)
+                
             },
 
 
