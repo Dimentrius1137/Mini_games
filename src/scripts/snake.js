@@ -39,17 +39,17 @@ export default class InitGame {
                 ctx.fillRect(apple.x + 2, apple.y + 2, this.step-4, this.step-4);
     });
             for(let i = 0; i < this.snake.length; i++){
-                    if(this.snake[0].x > this.ref.width){
+                    if(this.snake[0].x >= this.ref.width){
                         this.snake[0].x = 0; 
                     }
                     if(this.snake[0].x < 0){
-                        this.snake[0].x = this.ref.width;
+                        this.snake[0].x = this.ref.width-50;
                     }
-                    if(this.snake[0].y > this.ref.height){
+                    if(this.snake[0].y >= this.ref.height){
                         this.snake[0].y = 0; 
                     }
                    if(this.snake[0].y < 0){
-                        this.snake[0].y = this.ref.height;
+                        this.snake[0].y = this.ref.height-50;
     
                     }
                 ctx.fillStyle = "#79fc65";
