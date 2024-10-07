@@ -134,7 +134,7 @@
                             this.reset = true;
 
                         }
-                    },this.speed)
+                    },this.speed * 10)
                 }
             },
 
