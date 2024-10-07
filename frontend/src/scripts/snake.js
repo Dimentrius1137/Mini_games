@@ -43,13 +43,13 @@ export default class InitGame {
                         this.snake[0].x = 0; 
                     }
                     if(this.snake[0].x < 0){
-                        this.snake[0].x = this.ref.width-50;
+                        this.snake[0].x = this.ref.width-this.step;
                     }
                     if(this.snake[0].y >= this.ref.height){
                         this.snake[0].y = 0; 
                     }
                    if(this.snake[0].y < 0){
-                        this.snake[0].y = this.ref.height-50;
+                        this.snake[0].y = this.ref.height-this.step;
     
                     }
                 ctx.fillStyle = "#79fc65";
