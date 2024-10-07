@@ -9,8 +9,8 @@
             <router-link class="link d-flex align-items-center ms-3" to="/updates">updates</router-link>
             
         <div class="dropmenu">
-          <button disabled class="btn btn-light rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
-              Пока в работе
+          <button class="btn btn-light rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+              Войти
           </button>
               <ul class="dropdown-menu me-2 rounded-0 text-center ps-3 pe-3">
                     <li class="nav-item">

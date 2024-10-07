@@ -7,6 +7,10 @@
                 <label for="size">Размер арены: {{ areaSize }}</label>
                 <br>
                 <input type="range" v-model="areaSize" step="2" min="6" max="12">
+                <br>
+                <label for="size">Скорость: {{ speed }}</label>
+                <br>
+                <input type="range" v-model="speed" step="1" min="10" max="15">
             </Popup>
         </Transition>
    
@@ -14,7 +18,6 @@
     <div class="interface">
         <div class="score">Счет: {{ score }}</div>
         <button class="btn btn-success rounded-pill" @click="Restart">Рестарт</button>
-
         <div class="record">Рекорд: {{ CalculateRecord }}</div>
     </div>
 
@@ -44,18 +47,20 @@
         },  
         data(){
             return{
-                areaSize: 8,
-                isStart: false,
                 record: 0,
-                foodInterval: '',
-                snakeInterval: '',
-                newGame: '',
-                dir: '',
+                areaSize: 8,
+                speed: 10,
+                score: 0,
+                isStart: false,
                 reset: false,
-                score: 0
+                foodInterval: null,
+                snakeInterval: null,
+                newGame: null,
+                dir: ''
             }
         },
         created(){
+
             window.addEventListener('keyup', this.Controller);
         },
         watch: {
@@ -127,7 +132,7 @@
                             this.reset = true;
 
                         }
-                    },90)
+                    },this.speed * 10)
                 }
             },
 
