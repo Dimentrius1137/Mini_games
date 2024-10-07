@@ -7,6 +7,10 @@
                 <label for="size">Размер арены: {{ areaSize }}</label>
                 <br>
                 <input type="range" v-model="areaSize" step="2" min="6" max="12">
+                <br>
+                <label for="size">Скорость змея: {{ speed }}</label>
+                <br>
+                <input type="range" v-model="speed" step="1" min="10" max="15">
             </Popup>
         </Transition>
    
@@ -45,14 +49,17 @@
         data(){
             return{
                 areaSize: 8,
-                isStart: false,
+                speed: 10,
+                score: 0,
                 record: 0,
-                foodInterval: '',
-                snakeInterval: '',
-                newGame: '',
-                dir: '',
+                isStart: false,
                 reset: false,
-                score: 0
+                foodInterval: null,
+                snakeInterval: null,
+                newGame: null,
+                dir: '',
+                
+             
             }
         },
         created(){
@@ -127,7 +134,7 @@
                             this.reset = true;
 
                         }
-                    },90)
+                    },this.speed)
                 }
             },
 
