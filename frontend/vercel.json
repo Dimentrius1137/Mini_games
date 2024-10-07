@@ -1,3 +1,4 @@
 {
-    "rewrites": [{ "source": "/frontend", "destination": "/index.html" }]
+    "rewrites": [{ "source": "/frontend", "destination": "/index.html" }],
+    "outputDirectory": "frontend"
 }
