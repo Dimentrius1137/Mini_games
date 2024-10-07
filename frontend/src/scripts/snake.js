@@ -50,7 +50,6 @@ export default class InitGame {
                     }
                    if(this.snake[0].y < 0){
                         this.snake[0].y = this.ref.height-this.step;
-    
                     }
                 ctx.fillStyle = "#79fc65";
                 ctx.fillRect(this.snake[i].x, this.snake[i].y, this.step, this.step);
